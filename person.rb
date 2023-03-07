@@ -1,7 +1,9 @@
-class Person
+require_relative './nameble'
+class Person < Nameble
   # Constructor
   def initialize(id:, age:, name: 'Unknown', parent_permission: true)
     # instance variables
+    super()
     @id = id
     @name = name
     @age = age
@@ -29,6 +31,10 @@ class Person
 
   def can_use_services?
     @parent_permission == true || of_age?
+  end
+
+  def correct_name
+    @name
   end
 
   private
