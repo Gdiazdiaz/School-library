@@ -8,4 +8,9 @@ class Book
   end
 
   attr_accessor :author, :tittle
+
+  def add_rental(rental)
+    @rentals << rental
+    rental.book = self
+  end
 end
