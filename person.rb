@@ -1,7 +1,7 @@
 require_relative './nameable'
 class Person < Nameable
-
   attr_reader :rentals
+
   # Constructor
   def initialize(id:, age:, name: 'Unknown', parent_permission: true)
     # instance variables
