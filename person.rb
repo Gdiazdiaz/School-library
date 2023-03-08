@@ -1,5 +1,7 @@
 require_relative './nameable'
 class Person < Nameable
+
+  attr_reader :rentals
   # Constructor
   def initialize(id:, age:, name: 'Unknown', parent_permission: true)
     # instance variables
@@ -8,6 +10,7 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
   end
 
   # Get method
