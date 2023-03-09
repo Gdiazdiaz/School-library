@@ -44,6 +44,10 @@ class Person < Nameable
     Rental.new(date, self, book)
   end
 
+  def self.size
+    ObjectSpace.each_object(self).to_a
+  end
+
   private
 
   def of_age?
