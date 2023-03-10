@@ -83,12 +83,10 @@ class App
     if @rentals_array.empty?
       puts 'No existing rentals'
     else
-      puts "Can we have the ID of the person whose rentals you want to see? (by ID)"
+      puts 'Can we have the ID of the person whose rentals you want to see? (by ID)'
       id = gets.chomp
       @rentals_array.each do |rental|
-        if id == rental.person.id
-        puts "Book: #{rental.book}, Person: #{rental.person}, Date: #{rental.date}"
-        end
+        puts "Book: #{rental.book}, Person: #{rental.person}, Date: #{rental.date}" if id == rental.person.id
       end
       puts "That's allwe have =)"
     end
@@ -112,6 +110,7 @@ class App
       parent_permission = false
     else
       puts 'Invalid option, person could not be created'
+      abort
     end
     puts 'What classroom does this student belongs to?'
     classroom = gets.chomp
@@ -130,8 +129,8 @@ class App
   end
 
   def find_bookperson(title, id)
-    @book
-    @person
+    @book = {}
+    @person = {}
 
     @books_array.each do |bk|
       @book = bk if bk.title == title
