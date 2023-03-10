@@ -22,7 +22,7 @@ class MainController
   def execute
     puts @entry_point.menu
     puts 'Please type the number of your selection'
-    option = gets.chomp.to_i
+    option = gets.chomp
 
     choice = {
       1 => 'book_list',
