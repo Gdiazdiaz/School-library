@@ -5,27 +5,29 @@ require_relative './book'
 require_relative './rental'
 
 class App
+    def initialize(books_array: [], person_array: [], rentals_array: [])
+        @books_array = books_array
+        @person_array = person_array
+  @rentals_array = rentals_array
+    end
+
   def book_list
-    if Book.size
+    if @books_array.empty?
       puts 'No existing books'
     else
-      Book.each do |book|
+      @books_array.each do |book|
         puts "Title: #{book.title}, Author: #{book.author}"
       end
-      puts "That's allwe have =)"
+      puts "That's all we have =)"
     end
   end
 
   def people_list
-    if Teacher.size && Book.size
+    if @person_array.empty?
       puts 'No people on our list'
     else
-      Person.each do |person|
-        puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Special: #{person.specialization}"
-      end
-      Student.each do |student|
-        puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age},
-        Parents-permission: #{student.parents_permission}, Classroom #{student.classroom}"
+      @person_array.each do |person|
+        puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
       end
       puts "That's everybody"
     end
@@ -57,12 +59,12 @@ class App
     title = gets.chomp
     puts "Can we have this book's author?"
     author = gets.chomp
-    Book.new(title: title, author: author)
+    @books_array.push(Book.new(title: title, author: author))
     puts 'Book added successfully'
   end
 
   def create_rental
-    if Book.size
+    if @books_array.empty?
       puts 'No books available for rent'
     else
       puts 'What book do you want to rent? (by title)'
@@ -72,16 +74,16 @@ class App
       puts 'What date the book was rented? (dd/mm/yyyy)'
       date = gets.chomp
       (book, person) = find_bookperson(title, id)
-      Rental.new(date: date, person: Person[person], book: Book[book])
+      @rentals_array.push(Rental.new(date: date, book: book, person: person))
       puts 'Rental added successfully'
     end
   end
 
   def rentals_list
-    if Rental.size
+    if @rentals_array.empty?
       puts 'No existing rentals'
     else
-      Rental.each do |rental|
+      @rentals_array.each do |rental|
         puts "Book: #{rental.book}, Person: #{rental.person}, Date: #{rental.date}"
       end
       puts "That's allwe have =)"
@@ -109,24 +111,30 @@ class App
     end
     puts 'What classroom does this student belongs to?'
     classroom = gets.chomp
-    Student.new(id: id, name: name, age: age, parent_permission: parent_permission, classroom: classroom)
-    puts 'Student added successfully'
+    @person_array.push(Student.new(id: id, name: name, age: age, parent_permission: parent_permission, classroom: classroom))
+    print 'Student added successfully your ID is:'
+    puts id
   end
 
   def create_teacher(id, name, age)
     puts "What is the teacher's specialization?"
     specialization = gets.chomp
-    Teacher.new(id: id, name: name, age: age, specialization: specialization)
-    puts 'Teacher added successfully'
+    @person_array.push(Teacher.new(id: id, name: name, age: age, specialization: specialization))
+    print 'Teacher added successfully your ID is:'
+    puts id
   end
 
   def find_bookperson(title, id)
-    Book.size.each do |bk|
-      bk if bk.title == title
+    def initialize(book:, person:)
+        @book = book
+        @person = person
     end
-    Person.size.each do |persn|
-      persn if persn.id == id
+    @books_array.each do |bk|
+      @book = bk if bk.title == title
     end
-    [bk, persn]
+    @person_array.each do |persn|
+      @person = persn if persn.id == id
+    end
+    [@book, @person]
   end
 end
