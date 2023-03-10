@@ -5,11 +5,11 @@ require_relative './book'
 require_relative './rental'
 
 class App
-    def initialize(books_array: [], person_array: [], rentals_array: [])
-        @books_array = books_array
-        @person_array = person_array
-  @rentals_array = rentals_array
-    end
+  def initialize(books_array: [], person_array: [], rentals_array: [])
+    @books_array = books_array
+    @person_array = person_array
+    @rentals_array = rentals_array
+  end
 
   def book_list
     if @books_array.empty?
@@ -83,8 +83,12 @@ class App
     if @rentals_array.empty?
       puts 'No existing rentals'
     else
+      puts "Can we have the ID of the person whose rentals you want to see? (by ID)"
+      id = gets.chomp
       @rentals_array.each do |rental|
+        if id == rental.person.id
         puts "Book: #{rental.book}, Person: #{rental.person}, Date: #{rental.date}"
+        end
       end
       puts "That's allwe have =)"
     end
@@ -111,7 +115,8 @@ class App
     end
     puts 'What classroom does this student belongs to?'
     classroom = gets.chomp
-    @person_array.push(Student.new(id: id, name: name, age: age, parent_permission: parent_permission, classroom: classroom))
+    @person_array.push(Student.new(id: id, name: name, age: age, parent_permission: parent_permission,
+                                   classroom: classroom))
     print 'Student added successfully your ID is:'
     puts id
   end
@@ -125,10 +130,9 @@ class App
   end
 
   def find_bookperson(title, id)
-    def initialize(book:, person:)
-        @book = book
-        @person = person
-    end
+    @book
+    @person
+
     @books_array.each do |bk|
       @book = bk if bk.title == title
     end
