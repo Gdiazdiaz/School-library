@@ -53,7 +53,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link tbd]()
+- [Live Demo Link not available]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,13 +71,10 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-- On GitHub.com, navigate to the main page of the repository.
-- Above the list of files, click  Code.
-- Copy the URL for the repository.
-- Open Terminal.
-- Change the current working directory to the location where you want the cloned directory.
-- Type git clone, and then paste the URL you copied earlier.
-- Press Enter to create your local clone.
+- Go to this repo and copy the project link
+        https://github.com/Gdiazdiaz/catalogue
+- Open your terminal and clone the repo with this command "git clone https://github.com/Gdiazdiaz/catalogue.git"
+- Now, you have a copy on your pc.
 
 --->
 
