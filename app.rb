@@ -86,7 +86,7 @@ class App
       puts 'Can we have the ID of the person whose rentals you want to see? (by ID)'
       id = gets.chomp
       @rentals_array.each do |rental|
-        puts "Book: #{rental.book}, Person: #{rental.person}, Date: #{rental.date}" if id == rental.person.id
+        puts "Book: #{rental.book.author}, Person: #{rental.person.name}, Date: #{rental.date}" if id == rental.person.id
       end
       puts "That's allwe have =)"
     end
