@@ -3,6 +3,7 @@ require_relative './student'
 require_relative './teacher'
 require_relative './book'
 require_relative './rental'
+require_relative './data/preservedata'
 
 class App
   def initialize(books_array: [], person_array: [], rentals_array: [])
@@ -59,7 +60,9 @@ class App
     title = gets.chomp
     puts "Can we have this book's author?"
     author = gets.chomp
-    @books_array.push(Book.new(title: title, author: author))
+    book = Book.new(title: title, author: author)
+    @books_array.push(book)
+    save_book(book)
     puts 'Book added successfully'
   end
 
