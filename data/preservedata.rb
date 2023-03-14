@@ -33,14 +33,14 @@ def books_stored
     'Please add some books.  No books available.'
   else
     books = JSON.parse(File.read('./data/book.json'))
-    puts "Books on our list:"
+    puts 'Books on our list:'
     books.each do |book|
       book = Book.new(title: book['title'], author: book['author'])
       @books_array << book
     end
   end
   file.close
-  @books_array.each do |book| 
+  @books_array.each do |book|
     puts "Title: #{book.title}, Author: #{book.author}"
   end
 end
@@ -57,7 +57,7 @@ def save_student(student)
   file = File.open('./data/person.json')
 
   if file.read.empty?
-   person = [student_obj]
+    person = [student_obj]
   else
     person = JSON.parse(File.read('./data/person.json'))
     person << student_obj
@@ -81,7 +81,7 @@ def save_teacher(teacher)
   file = File.open('./data/person.json')
 
   if file.read.empty?
-   person = [teacher_obj]
+    person = [teacher_obj]
   else
     person = JSON.parse(File.read('./data/person.json'))
     person << teacher_obj
@@ -103,18 +103,28 @@ def display_person
     persons = JSON.parse(File.read('./data/person.json'))
     persons.each do |person|
       if person['type'] == 'Student'
-        student = Student.new(id: person['id'], name: person['name'], age: person['age'], classroom: person['classroom'])
-        @person_array << student
-      else teacher = Teacher.new(id: person['id'], name: person['name'], age: person['age'], specialization: person['specialization'])
-        @person_array << teacher
+        display_students(person)
+      else
+        display_teachers(person)
+      end
     end
   end
-  end
   file.close
-  puts "People on our list"
-  @person_array.each do |person| 
+  puts 'People on our list'
+  @person_array.each do |person|
     puts "Name: #{person.name}, Age: #{person.age}"
   end
+end
+
+def display_students(person)
+  student = Student.new(id: person['id'], name: person['name'], age: person['age'], classroom: person['classroom'])
+  @person_array << student
+end
+
+def display_teachers(person)
+  teacher = Teacher.new(id: person['id'], name: person['name'], age: person['age'],
+                        specialization: person['specialization'])
+  @person_array << teacher
 end
 
 def save_rental(date, book, person)
@@ -154,10 +164,8 @@ def load_rental
     end
   end
   file.close
-  puts "Rented books"
-  @rentals_array.each do |renta| 
+  puts 'Rented books'
+  @rentals_array.each do |renta|
     puts "Book: #{renta.book}, Person: #{renta.person}"
   end
 end
-
-
