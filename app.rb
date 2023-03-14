@@ -14,15 +14,7 @@ class App
   end
 
   def book_list
-    load_app
-    if @books_array.empty?
-      puts 'No existing books'
-    else
-      @books_array.each do |book|
-        p "Book title #{book['title']}, from Author #{book['author']}"
-      end
-      puts "That's all we have =)"
-    end
+    books_stored
   end
 
   def people_list
@@ -74,26 +66,13 @@ class App
       (book, person) = find_bookperson(title, id)
       rental = Rental.new(date: date, book: book, person: person)
       @rentals_array.push(rental)
-      save_rental(rental)
+      save_rental(rental.date, rental.book, rental.person)
       puts 'Rental added successfully'
     end
   end
 
   def rentals_list
-    if @rentals_array.empty?
-      puts 'No existing rentals'
-    else
-      puts 'Can we have the ID of the person whose rentals you want to see? (by ID)'
-      id = gets.chomp
-      @rentals_array.each do |rental|
-        next unless id == rental.person.id
-
-        puts "Book Rented: #{rental.book.title},
-        Person who rented the book: #{rental.person.name},
-        Date Rented: #{rental.date}"
-      end
-      puts "That's allwe have =)"
-    end
+    load_rental
   end
 
   def exit
@@ -144,11 +123,17 @@ class App
     @person = {}
 
     @books_array.each do |bk|
-      @book = bk if bk['title'] == 'title'
+      @book = bk if bk.title == title
     end
     @person_array.each do |persn|
       @person = persn if persn.id == id
     end
     [@book, @person]
+  end
+
+  def load_all
+    books_stored
+    display_person
+    load_rental
   end
 end

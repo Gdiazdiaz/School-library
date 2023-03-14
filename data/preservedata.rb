@@ -33,11 +33,16 @@ def books_stored
     'Please add some books.  No books available.'
   else
     books = JSON.parse(File.read('./data/book.json'))
+    puts "Books on our list:"
     books.each do |book|
-      p "Book title #{book['title']}, from Author #{book['author']}"
+      book = Book.new(title: book['title'], author: book['author'])
+      @books_array << book
     end
   end
   file.close
+  @books_array.each do |book| 
+    puts "Title: #{book.title}, Author: #{book.author}"
+  end
 end
 
 def save_student(student)
@@ -110,21 +115,19 @@ def display_person
   @person_array.each do |person| 
     puts "Name: #{person.name}, Age: #{person.age}"
   end
-  puts "That's all the people on our list"
 end
 
-def save_rental(rental)
+def save_rental(date, book, person)
   rental_obj = {
-    date: rental.date,
-    book: rental.book,
-    person: rental.person
+    date: date,
+    book: book.title,
+    person: person.name
   }
 
   file = File.open('./data/rental.json')
 
   if file.read.empty?
     rental = [rental_obj]
-    'There are no rented books yet'
   else
     rental = JSON.parse(File.read('./data/rental.json'))
     rental << rental_obj
@@ -141,15 +144,20 @@ def load_rental
   file = File.open('./data/rental.json')
 
   if File.empty?('./data/rental.json')
-    puts 'Please add book to rent'
+    puts 'No books currently rented'
   else
     rentals = JSON.parse(File.read('./data/rental.json'))
     puts 'Library books available: '
     rentals.each do |rental|
-      puts "Name: #{rental['person']}, Book: #{rental['book']}, Date: #{rental['date']}"
+      renta = Rental.new(date: rental['date'], book: rental['book'], person: rental['person'])
+      @rentals_array << renta
     end
   end
   file.close
+  puts "Rented books"
+  @rentals_array.each do |renta| 
+    puts "Book: #{renta.book}, Person: #{renta.person}"
+  end
 end
 
 
