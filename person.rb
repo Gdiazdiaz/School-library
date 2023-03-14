@@ -14,23 +14,15 @@ class Person < Nameable
   end
 
   # Get method
-  attr_reader :id
+  attr_accessor :id
 
   # Get method
-  attr_reader :name
+  attr_accessor :name
 
   # Get method
-  attr_reader :age
+  attr_accessor :age
 
-  # Set method
-  def name=(_name)
-    @name
-  end
-
-  # Set method
-  def age=(_age)
-    @age
-  end
+  attr_accessor :parent_permission
 
   def can_use_services?
     @parent_permission == true || of_age?

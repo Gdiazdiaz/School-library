@@ -24,14 +24,7 @@ class App
   end
 
   def people_list
-    if @person_array.empty?
-      puts 'No people on our list'
-    else
-      @person_array.each do |person|
-        puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
-      end
-      puts "That's everybody"
-    end
+    display_person
   end
 
   def create_person
@@ -121,8 +114,9 @@ class App
     end
     puts 'What classroom does this student belongs to?'
     classroom = gets.chomp
-    @person_array.push(Student.new(id: id, name: name, age: age, parent_permission: parent_permission,
-                                   classroom: classroom))
+    student = Student.new(id: id, name: name, age: age, parent_permission: parent_permission, classroom: classroom)
+    @person_array.push(student)
+    save_student(student)
     print 'Student added successfully your ID is:'
     puts id
   end
@@ -130,7 +124,9 @@ class App
   def create_teacher(id, name, age)
     puts "What is the teacher's specialization?"
     specialization = gets.chomp
-    @person_array.push(Teacher.new(id: id, name: name, age: age, specialization: specialization))
+    teacher = Teacher.new(id: id, name: name, age: age, specialization: specialization)
+    @person_array.push(teacher)
+    save_teacher(teacher)
     print 'Teacher added successfully your ID is:'
     puts id
   end
