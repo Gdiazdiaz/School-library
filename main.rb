@@ -9,6 +9,10 @@ class MainController
     @app = App.new
   end
 
+  def load_app
+    @app.load_app
+  end
+
   def execute
     puts @entry_point.menu
     @app.send(@options.display)
@@ -17,4 +21,5 @@ class MainController
 end
 
 main = MainController.new
+main.load_app
 main.execute

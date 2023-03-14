@@ -147,4 +147,8 @@ class App
     end
     [@book, @person]
   end
+
+  def load_app
+    books_stored
+  end
 end
