@@ -82,7 +82,7 @@ You can deploy this project using:
 
 To run tests, run the following command:
 
-- run npm test
+- rspec spec
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
