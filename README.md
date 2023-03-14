@@ -71,7 +71,9 @@ Clone this repository to your desired folder:
 - Open your terminal and clone the repo with this command "git clone https://github.com/Gdiazdiaz/School-library.git"
 - Now, you have a copy on your pc.
 
---->
+### Usage
+
+ruby main.rb
 
 ### Deployment
 
