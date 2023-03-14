@@ -4,6 +4,7 @@ require_relative './teacher'
 require_relative './book'
 require_relative './rental'
 require_relative './data/preservedata'
+require 'json'
 
 class App
   def initialize(books_array: [], person_array: [], rentals_array: [])
@@ -13,11 +14,12 @@ class App
   end
 
   def book_list
+    load_app
     if @books_array.empty?
       puts 'No existing books'
     else
       @books_array.each do |book|
-        puts "Title: #{book.title}, Author: #{book.author}"
+        p "Book title #{book['title']}, from Author #{book['author']}"
       end
       puts "That's all we have =)"
     end
@@ -70,7 +72,9 @@ class App
       puts 'What date the book was rented? (dd/mm/yyyy)'
       date = gets.chomp
       (book, person) = find_bookperson(title, id)
-      @rentals_array.push(Rental.new(date: date, book: book, person: person))
+      rental = Rental.new(date: date, book: book, person: person)
+      @rentals_array.push(rental)
+      save_rental(rental)
       puts 'Rental added successfully'
     end
   end
@@ -95,6 +99,10 @@ class App
   def exit
     puts 'Thank you for using our services'
     abort
+  end
+
+  def load_app
+    books_stored
   end
 
   private
@@ -136,7 +144,7 @@ class App
     @person = {}
 
     @books_array.each do |bk|
-      @book = bk if bk.title == title
+      @book = bk if bk['title'] == 'title'
     end
     @person_array.each do |persn|
       @person = persn if persn.id == id
