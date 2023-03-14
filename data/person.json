@@ -1,0 +1,15 @@
+[
+  {
+    "id": "f8b209061ea85848a",
+    "name": "Sofia",
+    "age": 15,
+    "parent_permission": true,
+    "classroom": "red"
+  },
+  {
+    "id": "a1d4ddfc4bc068498",
+    "name": "Felicia",
+    "age": 45,
+    "specialization": "Science"
+  }
+]
