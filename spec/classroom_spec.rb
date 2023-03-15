@@ -18,7 +18,7 @@ describe Classroom do
     end
 
     it 'test method add_rental' do
-        @classroom.add_student(@student).should be_an_instance_of Student
-      end
+      @classroom.add_student(@student).should be_an_instance_of Student
+    end
   end
 end
