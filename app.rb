@@ -31,7 +31,7 @@ class App
       name = gets.chomp
       puts "Can we have this person's age?"
       age = gets.chomp.to_i
-      id = (0..16).to_a.map { |_a| rand(16).to_s(16) }.join
+      id = Random.rand(1..1000)
       case selection
       when 1
         create_student(id, name, age)
@@ -60,13 +60,13 @@ class App
       puts 'What book do you want to rent? (by title)'
       title = gets.chomp
       puts 'Can we know who wants to rent this book? (by ID)'
-      id = gets.chomp
+      id = gets.chomp.to_i
       puts 'What date the book was rented? (dd/mm/yyyy)'
       date = gets.chomp
       (book, person) = find_bookperson(title, id)
       rental = Rental.new(date: date, book: book, person: person)
       @rentals_array.push(rental)
-      save_rental(rental.date, rental.book, rental.person)
+      save_rental(rental.date, rental.book, rental.person, id)
       puts 'Rental added successfully'
     end
   end
@@ -134,6 +134,6 @@ class App
   def load_all
     books_stored
     display_person
-    load_rental
+    load_rental_onload
   end
 end

@@ -10,6 +10,8 @@ def save_book(book)
     author: book.author
   }
 
+  File.new('./data/book.json', 'w+') unless File.exist?('./data/book.json')
+
   file = File.open('./data/book.json')
 
   if file.read.empty?
@@ -27,6 +29,7 @@ def save_book(book)
 end
 
 def books_stored
+  File.new('./data/book.json', 'w+') unless File.exist?('./data/book.json')
   file = File.open('./data/book.json')
 
   if File.empty?('./data/book.json')
@@ -47,12 +50,15 @@ end
 
 def save_student(student)
   student_obj = {
+    type: 'student',
     id: student.id,
     name: student.name,
     age: student.age,
     parent_permission: student.parent_permission,
     classroom: student.classroom
   }
+
+  File.new('./data/person.json', 'w+') unless File.exist?('./data/person.json')
 
   file = File.open('./data/person.json')
 
@@ -72,12 +78,14 @@ end
 
 def save_teacher(teacher)
   teacher_obj = {
+    type: 'teacher',
     id: teacher.id,
     name: teacher.name,
     age: teacher.age,
     specialization: teacher.specialization
   }
 
+  File.new('./data/person.json', 'w+') unless File.exist?('./data/person.json')
   file = File.open('./data/person.json')
 
   if file.read.empty?
@@ -95,6 +103,7 @@ def save_teacher(teacher)
 end
 
 def display_person
+  File.new('./data/person.json', 'w+') unless File.exist?('./data/person.json')
   file = File.open('./data/person.json')
 
   if File.empty?('./data/person.json')
@@ -127,13 +136,15 @@ def display_teachers(person)
   @person_array << teacher
 end
 
-def save_rental(date, book, person)
+def save_rental(date, book, person, personid)
   rental_obj = {
     date: date,
     book: book.title,
-    person: person.name
+    person: person.name,
+    personid: personid
   }
 
+  File.new('./data/renta;.json', 'w+') unless File.exist?('./data/rental.json')
   file = File.open('./data/rental.json')
 
   if file.read.empty?
@@ -151,14 +162,18 @@ def save_rental(date, book, person)
 end
 
 def load_rental
+  File.new('./data/renta;.json', 'w+') unless File.exist?('./data/rental.json')
   file = File.open('./data/rental.json')
 
   if File.empty?('./data/rental.json')
     puts 'No books currently rented'
   else
     rentals = JSON.parse(File.read('./data/rental.json'))
-    puts 'Library books available: '
+    puts 'Can we have the ID of the person whose rentals you want to see? (by ID)'
+    id = gets.chomp.to_i
     rentals.each do |rental|
+      next unless id == rental['personid']
+
       renta = Rental.new(date: rental['date'], book: rental['book'], person: rental['person'])
       @rentals_array << renta
     end
@@ -168,4 +183,26 @@ def load_rental
   @rentals_array.each do |renta|
     puts "Book: #{renta.book}, Person: #{renta.person}"
   end
+end
+
+def load_rental_onload
+  File.new('./data/renta;.json', 'w+') unless File.exist?('./data/rental.json')
+  file = File.open('./data/rental.json')
+
+  if File.empty?('./data/rental.json')
+    puts 'No books currently rented'
+  else
+    rentals = JSON.parse(File.read('./data/rental.json'))
+    puts 'Rented books'
+    rentals.each do |rental|
+      puts "Book: #{rental['book']}, Person: #{rental['book']}"
+      # renta = Rental.new(date: rental['date'], book: rental['book'], person: rental['person'])
+      # @rentals_array << renta
+    end
+  end
+  file.close
+  # puts 'Rented books'
+  # @rentals_array.each do |renta|
+
+  # end
 end
