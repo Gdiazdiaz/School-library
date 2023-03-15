@@ -1,10 +1,14 @@
 require_relative '../person'
+require_relative '../book'
+require_relative '../rental'
 
 describe Person do
   before :each do
     @id = 0o1
     @name = 'Test Name'
     @age = 25
+    @date = '12/12/12'
+    @book = Book.new(title: 'The Great Gatsby', author: 'Scott Fitzgerald')
     @person = Person.new(id: @id, name: @name, age: @age, parent_permission: true)
   end
 
@@ -31,6 +35,10 @@ describe Person do
 
     it 'test method correct_name' do
       expect(@person.correct_name).to eq @name
+    end
+
+    it 'test method add_rental' do
+      @person.add_rental(@book, @date).should be_an_instance_of Rental
     end
   end
 end
