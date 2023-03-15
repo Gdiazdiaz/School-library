@@ -36,13 +36,12 @@ class Person < Nameable
     Rental.new(date, self, book)
   end
 
-  def self.size
-    ObjectSpace.each_object(self).to_a
-  end
-
   private
 
   def of_age?
     @age > 18
   end
 end
+
+sofia = Person.new(name: 'Sofia', age: 25, id: 125, parent_permission: true)
+puts sofia.correct_name
