@@ -19,5 +19,12 @@ describe Teacher do
     it 'test name of student' do
       teacher.name.should eql 'gio'
     end
+
+    context 'test service method' do
+      it 'Can use service method' do
+        teacher = Teacher.new(id: 123, age: 22, specialization: 'math', name: 'gio', parent_permission: true)
+        teacher.can_use_services?.should eql true
+      end
+    end
   end
 end
