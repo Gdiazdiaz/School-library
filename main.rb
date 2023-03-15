@@ -14,7 +14,12 @@ class MainController
     @app.send(@options.display)
     execute
   end
+
+  def on_load
+    @app.send('load_all')
+  end
 end
 
 main = MainController.new
+main.on_load
 main.execute

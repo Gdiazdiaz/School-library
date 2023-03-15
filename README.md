@@ -51,12 +51,6 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Live Demo <a name="live-demo"></a>
-
-- [Live Demo Link not available]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## 💻 Getting Started <a name="getting-started"></a>
 
 To get a local copy up and running, follow these steps.
@@ -66,17 +60,20 @@ To get a local copy up and running, follow these steps.
 In order to run this project you need:
 
 - Visual Studio
+- Ruby
 
 ### Setup
 
 Clone this repository to your desired folder:
 
 - Go to this repo and copy the project link
-        https://github.com/Gdiazdiaz/catalogue
-- Open your terminal and clone the repo with this command "git clone https://github.com/Gdiazdiaz/catalogue.git"
+  https://github.com/Gdiazdiaz/School-library
+- Open your terminal and clone the repo with this command "git clone https://github.com/Gdiazdiaz/School-library.git"
 - Now, you have a copy on your pc.
 
---->
+### Usage
+
+ruby main.rb
 
 ### Deployment
 
@@ -88,7 +85,7 @@ You can deploy this project using:
 
 To run tests, run the following command:
 
-- run npm test
+- rspec spec
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
