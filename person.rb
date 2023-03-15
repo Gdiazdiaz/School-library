@@ -33,11 +33,7 @@ class Person < Nameable
   end
 
   def add_rental(book, date)
-    Rental.new(date, self, book)
-  end
-
-  def self.size
-    ObjectSpace.each_object(self).to_a
+    Rental.new(date: date, person: name, book: book.title)
   end
 
   private
@@ -46,3 +42,6 @@ class Person < Nameable
     @age > 18
   end
 end
+
+sofia = Person.new(name: 'Sofia', age: 25, id: 125, parent_permission: true)
+puts sofia.correct_name
